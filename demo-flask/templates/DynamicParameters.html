@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>My Test Responsive Dashboard</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://public.tableau.com/javascripts/api/tableau-2.0.0.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<script>
+			currentViz = '';
+			
+			/**
+			 * Instantiate our vizualization.
+			 */
+			$(function() {
+				var url  = 'https://10az.online.tableau.com/t/datar/views/DynamicParam/Dashboard1';
+				var vizOptions = {
+					showTabs           : true,
+					hideToolbar        : true,
+					width              : "420px",
+					height             : "420px"
+				};
+				
+				currentViz = new tableauSoftware.Viz(document.getElementById('viz'), url, vizOptions);
+				currentViz.addEventListener(tableauSoftware.TableauEventName.FILTER_CHANGE, onFilterChange);
+			});
+			
+			/**
+			 * Catches the tableau event fired when a filter is changed.
+			 */
+			function onFilterChange(e)
+			{
+				if (e.getFieldName() == 'Region') {
+					e.getFilterAsync().then(function(filter) {
+						var values = filter.getAppliedValues();
+						var value = values[0]['value'];
+						
+						// Value of the parameter if "All" is selected in the filter.
+						if (values.length > 1) {
+							value = 'All';
+						}
+						
+						currentViz.getWorkbook().changeParameterValueAsync('MyDynamicParam', value);
+					});
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="navbar navbar-default">
+			<a class="navbar-brand" href="http://www.interworks.com">
+				<img src="https://www.interworks.com/logo/images/logo.png" />
+			</a>
+		</div>
+		<div id="viz"></div>
+	</body>
+</html>

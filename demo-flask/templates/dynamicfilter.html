@@ -1,17 +1,17 @@
 <html>
     <head>
-        <script type="text/javascript" src="http://windows/javascripts/api/tableau-2.0.1.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.comiui/1.11.4/jquery-ui.js"></script>
+        <script type="text/javascript" src="https://online.tableau.com/javascripts/api/tableau-2.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" >
             var viz, workbook, activeSheet, sheet, worksheetArray;
             var filtersArray = [];
 
-            var paramslist = ["Product"]:
+            var paramsList = ["Category"];
             var filterNames = [];
             function initializeViz() {
                 var placeholderDiv = document.getElementById("tableauViz");
-                var url = "http://windows/views/ParamsDemo/Dashboard";
+                var url = "https://10az.online.tableau.com/t/datar/views/Superstoretest/Overview";
                 var options = {
                     width: placeholderDiv.offsetWidth,
                     height: 800,
@@ -33,7 +33,7 @@
                     combobox.options.length = 0;
                 }else {
                     var combobox = document.createElement('select');
-                    combobox.setAttribute('id.,filterObj.fieldName);
+                    combobox.setAttribute('id',filterObj.fieldName);
                 }
                 var comboOption = document.createElement('option');
                 comboOption.setAttribute('value','(All)');

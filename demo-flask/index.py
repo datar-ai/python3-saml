@@ -41,6 +41,19 @@ def getData():
     return render_template(
         'getData.html')
 
+
+@app.route("/DynamicParameters")
+def DynamicParameters():
+    return render_template(
+        'DynamicParameters.html')
+
+
+@app.route("/DynamicFilter")
+def dynamicfilter():
+    return render_template(
+        'dynamicfilter.html')
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     req = prepare_flask_request(request)
