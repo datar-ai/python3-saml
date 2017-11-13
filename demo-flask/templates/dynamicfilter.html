@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://windows/javascripts/api/tableau-2.0.1.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.comiui/1.11.4/jquery-ui.js"></script>
+        <script type="text/javascript" >
+            var viz, workbook, activeSheet, sheet, worksheetArray;
+            var filtersArray = [];
+
+            var paramslist = ["Product"]:
+            var filterNames = [];
+            function initializeViz() {
+                var placeholderDiv = document.getElementById("tableauViz");
+                var url = "http://windows/views/ParamsDemo/Dashboard";
+                var options = {
+                    width: placeholderDiv.offsetWidth,
+                    height: 800,
+                    hideTabs: true,
+                    hideToolbar: true,
+                    onFirstInteractive: function () {
+                        workbook = viz.getWorkbook();
+                        activeSheet = workbook.getActiveSheet();
+                        getParamSheets();
+                    }
+                };
+                viz = new tableau.Viz(placeholderDiv, url, options);
+            }
+
+            function buildParamsMenu(filterObj){
+                var paramsDiv = document.getElementById("paramsDiv");
+                if(document.getElementById(filterObj.fieldName)) {
+                    var combobox = document.getElementById(filterObj.fieldName);
+                    combobox.options.length = 0;
+                }else {
+                    var combobox = document.createElement('select');
+                    combobox.setAttribute('id.,filterObj.fieldName);
+                }
+                var comboOption = document.createElement('option');
+                comboOption.setAttribute('value','(All)');
+                comboOption.innerHTML = filterObj.fieldName;
+                combobox.appendChild(comboOption);
+                for (var j = 0; j < filterObj.filterValues.length; j++) {
+                    var comboOption = document.createElement('option');
+                    comboOption.setAttribute('value', filterObj.filterValues[j].value);
+                    comboOption.innerHTML = filterObj.filterValues[j].value;
+                    combobox.appendChild(comboOption);
+                }
+                paramsDiv.appendChild(combobox);
+                combobox.addEventListener('change', function(e){
+                    console.log(filterObj.fieldName + " changed to " +this.options[this.selectedIndex].value);
+                    workbook.changeParameterValueAsync(filterObj.fieldName,this.options[this.selectedIndex].value);
+                });
+            }
+
+            function buildFiltersArray(sheetIndex) {
+                var paramSheet = worksheetArray[sheetIndex];
+                paramSheet.getFiltersAsync()
+                .then(function (promise) {
+                for (var i = 0; i < promise.length; i++) {
+                    if (promise[i].getFilterType() == "categorical" && $.inArray(promise[i].getFieldName(), filterNames) == -1 && $.inArray(promise[i].getFieldName(), paramsList) > -1)
+                    {
+                        var filterObj = {};
+                        filterNames.push(promise[i].getFieldName());
+                        filterObj.fieldName = promise[i].getFieldName();
+                        filterObj.filterValues = promise[i].getAppliedValues();
+                        filtersArray.push(filterObj);
+                        buildParamsMenu(filterObj);
+                    }
+                }
+
+                var refreshBtn = document.getElementById("refresh");
+                refreshBtn.addEventListener('click', function (e) {
+                    viz.refreshDataAsync()
+                    .then(function () {
+                        filterNames = [];
+                        getParamSheets();
+                    });
+                });
+                });
+            }
+
+            function getParamSheets(){
+                sheet = viz.getWorkbook().getActiveSheet();
+                if(sheet.getSheetType() === 'worksheet'){
+                    buildFiltersArray(sheet.getIndex());
+                } else {
+                    worksheetArray = sheet.getWorksheets();
+                    for (var i = 0; i < worksheetArray.length; i++) {
+                        buildFiltersArray(worksheetArray[i].getIndex());
+                    }
+                }
+            }
+            $(initializeViz);
+        </script>
+    </head>
+    <body>
+        <div id="paramsDiv"></div>
+        <input type="button" value="refresh" id="refresh"/>
+        <div id="tableauViz"></div>
+    </body>
+</html>
+

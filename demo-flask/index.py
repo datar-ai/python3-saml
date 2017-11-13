@@ -11,7 +11,9 @@ from onelogin.saml2.utils import OneLogin_Saml2_Utils
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'onelogindemopytoolkit'
-app.config['SAML_PATH'] = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'saml')
+print(os.path.dirname(__file__))
+print(os.path.join(os.path.dirname(__file__), 'saml'))
+app.config['SAML_PATH'] = os.path.join(os.path.dirname(__file__), 'saml')
 
 
 def init_saml_auth(req):
@@ -33,6 +35,11 @@ def prepare_flask_request(request):
         'post_data': request.form.copy()
     }
 
+
+@app.route("/getData")
+def getData():
+    return render_template(
+        'getData.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -67,8 +74,10 @@ def index():
             session['samlNameId'] = auth.get_nameid()
             session['samlSessionIndex'] = auth.get_session_index()
             self_url = OneLogin_Saml2_Utils.get_self_url(req)
+            print(self_url)
             if 'RelayState' in request.form and self_url != request.form['RelayState']:
-                return redirect(auth.redirect_to(request.form['RelayState']))
+                print(request.form['RelayState'])
+                return redirect(auth.redirect_to(self_url + "/dev"))
     elif 'sls' in request.args:
         dscb = lambda: session.clear()
         url = auth.process_slo(delete_session_cb=dscb)
@@ -125,4 +134,4 @@ def metadata():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='localhost', port=8000, debug=True)

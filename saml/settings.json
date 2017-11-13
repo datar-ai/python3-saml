@@ -2,13 +2,13 @@
     "strict": true,
     "debug": true,
     "sp": {
-        "entityId": "https://kbs2wydrsj.execute-api.us-east-1.amazonaws.com/dev/metadata/",
+        "entityId": "http://localhost:8000/metadata/",
         "assertionConsumerService": {
-            "url": "https://kbs2wydrsj.execute-api.us-east-1.amazonaws.com/dev/?acs",
+            "url": "http://localhost:8000/?acs",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
         },
         "singleLogoutService": {
-            "url": "https://kbs2wydrsj.execute-api.us-east-1.amazonaws.com/dev/?sls",
+            "url": "http://localhost:8000/?sls",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
         },
         "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
@@ -16,13 +16,13 @@
         "privateKey": ""
     },
     "idp": {
-        "entityId": "https://app.onelogin.com/saml/metadata/723761",
+        "entityId": "https://app.onelogin.com/saml/metadata/720865",
         "singleSignOnService": {
-            "url": "https://datar-ai-dev.onelogin.com/trust/saml2/http-post/sso/723761",
+            "url": "https://datar-ai-dev.onelogin.com/trust/saml2/http-post/sso/720865",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
         },
         "singleLogoutService": {
-            "url": "https://datar-ai-dev.onelogin.com/trust/saml2/http-redirect/slo/723761",
+            "url": "https://datar-ai-dev.onelogin.com/trust/saml2/http-redirect/slo/720865",
             "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
         },
         "x509cert": "MIIEGjCCAwKgAwIBAgIUMWeMXE8Ys4mPdRPhtTfIksdOL9YwDQYJKoZIhvcNAQEFBQAwWTELMAkGA1UEBhMCVVMxETAPBgNVBAoMCERhdGFSLkFJMRUwEwYDVQQLDAxPbmVMb2dpbiBJZFAxIDAeBgNVBAMMF09uZUxvZ2luIEFjY291bnQgMTE2ODg1MB4XDTE3MTEwMTA1NTMzMFoXDTIyMTEwMjA1NTMzMFowWTELMAkGA1UEBhMCVVMxETAPBgNVBAoMCERhdGFSLkFJMRUwEwYDVQQLDAxPbmVMb2dpbiBJZFAxIDAeBgNVBAMMF09uZUxvZ2luIEFjY291bnQgMTE2ODg1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu24yXa57WvQ1mDBC6PREoMZIpENbXN9uEHMSuoE5pXmhfKJD4ml8zxRfuBCw3Pbx32rU36cPfxAmtLt3PUQO0NB4KfkWZAzdVRz8ueE/CnyYhyrU4rDpBfkk0iuw+x8Cc7eCHxbkj7Itb4Q9a4n/uEyD78uHUaXM2itG7OoQL8dBAtfiVvS1BbhX/29LrAwc/c+NNTVj/wecFPh5GR7zWShbu6rlV72/TWpJIsGwfHJKQtFLL/GQxgPE44c9s+KTz3/QGcg/A/n9HrxjqMoj6xQ1H6B+V938eI6FR70fMjn23ADPpIQdAbfN9yoYXz/79FbOZGVclnCcOShDhgNbAwIDAQABo4HZMIHWMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFCoU92shhtyhYdJnpSpW1ya2m7JXMIGWBgNVHSMEgY4wgYuAFCoU92shhtyhYdJnpSpW1ya2m7JXoV2kWzBZMQswCQYDVQQGEwJVUzERMA8GA1UECgwIRGF0YVIuQUkxFTATBgNVBAsMDE9uZUxvZ2luIElkUDEgMB4GA1UEAwwXT25lTG9naW4gQWNjb3VudCAxMTY4ODWCFDFnjFxPGLOJj3UT4bU3yJLHTi/WMA4GA1UdDwEB/wQEAwIHgDANBgkqhkiG9w0BAQUFAAOCAQEAPRHkZIKfaWX7V4C1TYXme8yGdoJRsiJAS7at5qmfmJKy36FKks5sf3F6JTIAJRKp0xK91/8mjRglEN91zQkoXH87DoNUOkxvOJrjHj4eiY2YBHXH/qDFL1wCK7jESnknFkb3jd2w4TBWg7ADVwUmm+z4Rz5lt2lxNWJ9ZW+HAQhg8qGnHIIRl/hYAcURkkCMbufaoBnFDx6rM1hCL9M6PPvlqH6iUydBS3P1p+uxMWYgITPupN9t+X3ukMpNDnPVxdsjtohnM+qXl4/TQv+3aqKbNc4zOQa7wSAzsNSD21V0QQPWW2mFeXnyhN4CASeBKcn2v2B+DUo0AbWOdsigZA=="
