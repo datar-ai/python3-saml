@@ -16,18 +16,18 @@
     "contactPerson": {
         "technical": {
             "givenName": "technical_name",
-            "emailAddress": "technical@example.com"
+            "emailAddress": "roger@datar.ai"
         },
         "support": {
             "givenName": "support_name",
-            "emailAddress": "support@example.com"
+            "emailAddress": "amy@datar.ai"
         }
     },
     "organization": {
         "en-US": {
             "name": "sp_test",
             "displayname": "SP test",
-            "url": "http://sp.example.com"
+            "url": "http://www.datar.ai"
         }
     }
 }
